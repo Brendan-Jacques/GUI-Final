@@ -1,0 +1,85 @@
+<!-- Name: Brendan Jacques, brendan_jacques@student.uml.edu
+ Student - Computer Science Major, UMass Lowell
+ Comp.4610, GUI Programming I
+ File: /usr/cs/2018/bjacques/public_html/461f2017/hw6/hw6.html
+ Created: 27-November-2017
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="./js/jquery-ui/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="./css/final.css">
+    <script src="./js/jquery-libraries/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="./js/jquery-ui/jquery-ui.min.js"></script>
+    <script src="./js/jquery-validate/dist/jquery.validate.min.js"></script>
+    <script src="./js/CamanJS-4.1.1/dist/caman.full.min.js"></script>
+    <script src="./js/exif-js-master/exif.js"></script>
+    <script src="./js/tapmodo-Jcrop-1902fbc/js/jquery.Jcrop.min.js"></script>
+</head>
+<body>
+	<div id="leftControl">
+		<div id="main-folder" class="accordion-main">
+			<h3>All Photos</h3>
+			<div id="main-folder-content">
+				<!--
+					<div id="photo-1"></div>
+					<div id="photo-2"></div>
+					<div class="accordion">
+						<h3>Sub-folder</h3>
+						<div>
+
+						</div>
+					</div>
+				-->
+			</div>
+		</div>
+		<input type='button' id='add-folder' class="function" value='Add Folder' />
+		<input type='button' id='delete-folder' class="function" value='Delete Folder' />
+		<input type='button' id='move-image' class="function" value='Move Image to Folder' />
+		<input type='button' id='add-folder' class="function" value='Delete Image' />
+	</div>
+	<div id="main-page">
+		<div id='dialog-form' title='Move Image'>
+			<form>
+				<fieldset>
+					<label for='image'>Image:</label>
+					<input list='files' name='image-name' id='image-name' class='text ui-widget-content ui-corner-all' />
+					<label for='folder'>Folder:</label>
+					<input list='folders' name='folder-name' id='folder-name' class='text ui-widget-content ui-corner-all' />
+				</fieldset>
+			</form>
+			<datalist id='files'>
+			</datalist>
+			<datalist id='folders'>
+			</datalist>
+		</div>
+		<div id="fileNames">
+		</div>
+		<div id="picture_display">
+    	</div>
+    	<form id="picture_editor">
+    		<div id="color-correction">
+    			<input type="text" id="brightness" class="editor_input" value="0" />
+    			<input type="text" id="contrast" class="editor_input" value="0"/>
+    			<input type="text" id="red" class="editor_input" value="0"/>
+    			<input type="text" id="green" class="editor_input" value="0"/>
+    			<input type="text" id="blue" class="editor_input" value="0"/>
+    			<input type="button" id="upload" class="function" value="Upload Image"/>
+    		</div>
+    	</form>
+    	<div id="picture_hyperlink">
+    	</div>
+	</div>
+    <div id="right-control">
+    </div>
+</body>
+<!-- <script src=./js/Directory-Structure-JSON-master/index.js></script> -->
+<script src="./js/myJS/image-editor.js"></script>
+<script src="./js/myJS/final_project.js"></script>
+<!-- <script src="./js/myJS/file_upload.js"></script> -->
+<!-- <script src="./js/myJS/file-upload2.js"></script> -->
+<script src="./js/myJS/jquery-accordion.js"></script>
+<script src="./js/myJS/validation-final.js"></script>
+<script src="./js/facebook-SDK.js"></script>
+</html>

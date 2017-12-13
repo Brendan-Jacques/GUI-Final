@@ -1,0 +1,2 @@
+You're allowed to use external plugins provided you properly document which
+ones you use!

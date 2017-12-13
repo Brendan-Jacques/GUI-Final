@@ -1,0 +1,22 @@
+<html>
+<head>
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body>
+	<h1><b>Header</b></h1>
+	<div id="leftControl">
+		<div id="folders">
+		</div>
+	</div>
+    <div id='fileNames'></div>
+    <div id="fileUpload_button" np-app = "fileUpload">
+    	<div ng-controller = "myCtrl">
+        	<input type = "file" file-model = "myFile"/>
+        	<button ng-click = "uploadFile()">upload me</button>
+     	</div>
+    </div>
+</body>
+<script src="./final_project.js"></script>
+<script src="./js/file_upload.js"></script>
+</html>
