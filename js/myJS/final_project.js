@@ -37,6 +37,58 @@ function fillDatalists() {
 		);
 	});
 }
+/*
+function saveToServer(image, name) {
+	var formData = new FormData();
+		formData.append('functionname', 'upload-64');
+		formData.append('file', image);
+		formData.append('fileName', name);
+		formData.append('location', 'default');
+		for(var pair of formData.entries()) {
+  			console.log(pair[0]+ ', '+ pair[1]); 
+		}
+		$.ajax({
+			type: "POST",
+			url: "./php/server.php",
+			data: formData,
+			contentType: false,
+			processData: false,
+			success: function(data) {
+				if(data == 'Nope') {
+					console.log(data);
+					return;
+				}
+				//console.log(data);
+				var new_data = JSON.parse(data);
+				var new_html = html_concat(new_data);
+				//console.log(new_html);
+				$("#main-folder-content").html(new_html);
+				$(".accordion").accordion({
+  					collapsible: true,
+  					active: false,
+  					styleHeight: "content"
+  				});
+  				images = [];
+  				i = 0;
+  				$("div.image-selector").each(function() {
+  					images[i] = $(this).attr("value");
+  					i++;
+  				});
+  				folders = [];
+  				j = 0;
+  				$("div.image-folder").each(function() {
+  					folders[i] = $(this).attr("value");
+  					//console.log(folders[j]);
+  					j++;
+  				});
+  				fillDatalists();
+			},
+			error: function(xhr) {
+				alert("Failure!");
+			}
+		});
+}
+*/
 
 $("document").ready(function() {
 	$.ajax({
@@ -63,14 +115,14 @@ $("document").ready(function() {
   			i = 0;
   			$("div.image-selector").each(function() {
   				images[i] = $(this).attr("value");
-  				console.log(images[i]);
+  			//	console.log(images[i]);
   				i++;
   			});
   			folders = [];
   			j = 0;
   			$("div.image-folder").each(function() {
   				folders[j] = $(this).attr("value");
-  				console.log(folders[j]);
+  			//	console.log(folders[j]);
   				j++;
   			});
   			fillDatalists();
@@ -85,10 +137,19 @@ $("document").ready(function() {
 		if($("#picture_editor").css('display') == 'none') {
 			$("#picture_editor").css('display', 'block');
 		}
+		if($("#picture_hyperlink").css('display') == 'none') {
+			$("#picture_hyperlink").css('display', 'block');
+		}
 		//console.log(val);
-		$("#picture_display").html("<img class='canvas view' id='photo-"+ val +"' src='"+ name +"'></img>");
-		$("#picture_hyperlink").html("<div><h4>Image Hyperlink</h4></div><a src='"+ adr +"'>"+ adr +"</a>");
-		initJCrop(name);
+		$("#picture_display").html("<img class='view' id='"+ val +"' src='"+ name +"'></img>");
+		$("#picture_edit").html("<img class='canvas' id='canvas' src='"+ name +"' ></img>");
+		//$("#picture_crop").html("<img class='crop' id='crop' src='"+ name +"' ></img>");
+		$("#picture_hyperlink").html("<div><h4>Image Hyperlink</h4></div><a href='"+ adr +"' target='_blank'>"+ adr +"</a>");
+		if($("#share").css('display') == 'none') {
+		//	$('#facebook-share').html("<a id='facebook-btn' class='btn btn-success clearfix'>Facebook Share</a>")
+			$("#twitter-share").html("<a href='https://twitter.com/share' data-url='"+ adr +"' class='twitter-share-button' data-show-count='false'>Tweet</a><script async src='https://platform.twitter.com/widgets.js' charset='utf-8'></script>")
+			$("#share").css('display', 'block');
+		}
 	});
 
 	$(document).on('click', '#ui-id-1', function() {
@@ -262,120 +323,44 @@ $("document").ready(function() {
 		dialog.dialog("open");
 	});
 
-	$("#upload").on("click", function(){
-    	$(this).text("Uploading...").prop("disabled", true);
-
-    	readFile(file, {
-    	    width: uploadSize,
-    	    height: uploadSize,
-    	    crop: cropCoords
-    	}).done(function(imgDataURI) {
-    	    var data = new FormData();
-    	    var blobFile = dataURItoBlob(imgDataURI);
-    	    data.append('file', blobFile);
-    	    
-    	    $.ajax({
-    	        url: "./php/server.js",
-    	        data: data,
-    	        cache: false,
-    	        contentType: false,
-    	        processData: false,
-    	        type: 'POST',
-    	        success: function() {
-    	            console.log("Yay!");
-    	        },
-    	        error: function(xhr) {
-    	            console.log(imgDataURI.substr(0,128)+"...");
-    	        }
-    	    });
-    	});
+	color_correct = $("#color-form").dialog({
+		autoOpen: false,
+		width: 800,
+		height: 900,
+		modal: true,
+		"Submit": function(data) {
+			console.log("Saved");
+			color_correct.dialog("close");
+		},
+		Cancel: function(data) {
+			color_correct.dialog("close");
+		}
 	});
 
-	var initJCrop = function(imgDataUrl){
-	    var img = $("img.view").attr("src", imgDataUrl);
-	    
-	    var storeCoords = function(c) {
-	        cropCoords = c;
-	    };
-	    
-	    var w = img.width();
-	    var h = img.height();
-	    var s = uploadSize;
-	    img.Jcrop({
-	        onChange: storeCoords,
-	        onSelect: storeCoords,	
-	        aspectRatio: 1,
-	        setSelect: [(w - s) / 2, (h - s) / 2, (w - s) / 2 + s, (h - s) / 2 + s]
-	    });
-	};
+	$("#color-correct").on("click", function() {
+		color_correct.dialog("open");
+	});
 
-	var readFile = function(file, options) {
-	    var dfd = new $.Deferred();
-	    var allowedTypes = ["image/gif", "image/jpeg", "image/pjpeg", "image/png", "image/bmp"];
-	    if ($.inArray(file.type, allowedTypes) !== -1) {
-	        //define FileReader object
-	        var reader = new FileReader();
-	        var that = this;
+	$(document).on("click", "#color_correct_save1", function() {
+		var download = document.createElement("a");
+		var new_image = document.getElementById('canvas').toDataURL();
+		download.href = new_image;
+		var new_name = prompt("What's the name of the new file?");
+		download.download = new_name;
+		download.click();
+		//var image = new Image();
+		//image.src = new_image;
+		
+		//$("#base64Img").attr('src', $(new_image).val);
+		//saveToServer(new_image, new_name);
+		console.log("Saved");
+		color_correct.dialog("close");
+	});
 
-	        //init reader onload event handlers
-	        reader.onload = function(e) {
-	            var image = $('<img/>')
-	                .load(function() {
-	                    //when image is fully loaded
-	                    var newimageurl = getCanvasImage(this, options);
-	                    dfd.resolve(newimageurl, this);
-	                })
-	                .attr('src', e.target.result);
-	        };
-	        reader.onerror = function(e) {
-	            dfd.reject("Couldn't read file " + file.name);
-	        };
-	        //begin reader read operation
-	        reader.readAsDataURL(file);
-	    } else {
-	        //some message for wrong file format
-	        dfd.reject("Selected file format (" + file.type + ") not supported!");
-	    }
-	    return dfd.promise();
-	};
+	$(document).on("click", "#color_correct_cancel", function() {
+		console.log("Saved");
+		color_correct.dialog("close");
+	});
 
-	var getCanvasImage = function(image, options) {
-	    //define canvas
-	    canvas = document.createElement("canvas"),
-	        ratio = {
-	            x: 1,
-	            y: 1
-	        };
-	    if (options) {
-	        if (image.height > image.width) {
-	            ratio.x = image.width / image.height;
-	        } else {
-	            ratio.y = image.height / image.width;
-	        }
-	    }
-	    canvas.height = options.crop ? Math.min(image.height, options.height) : Math.min(image.height, Math.floor(options.height * ratio.y));
-	    canvas.width = options.crop ? Math.min(image.height, options.width) : Math.min(image.width, Math.floor(options.width * ratio.x));
-	    ctx = canvas.getContext("2d");
 
-	    if (options.crop) {
-	        //get resized width and height
-	        var c = options.crop;
-	        var f = image.width / options.previewWidth;
-	        var t = function(a) {
-	            return Math.round(a * f);
-	        };
-	        ctx.drawImage(image, t(c.x), t(c.y), t(c.w), t(c.h), 0, 0, canvas.width, canvas.height);
-	    } else {
-	        ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
-	    }
-	    //convert canvas to jpeg url
-	    return canvas.toDataURL("image/jpeg");
-	};
-
-	function applyCrop() {
-  		canvas.width = prefsize.w;
-  		canvas.height = prefsize.h;
-  		context.drawImage($("img.view"), prefsize.x, prefsize.y, prefsize.w, prefsize.h, 0, 0, canvas.width, canvas.height);
-  		validateImage();
-	}
 })

@@ -62,7 +62,11 @@ switch($data) {
 		$ext = $info['extension'];
 		$name = $_POST['fileName'];
 		$location = $_POST['location'];
-		$location = ltrim($location, "./");
+		if($location == 'default') {
+			$location = 'images/';
+		} else {
+			$location = ltrim($location, "./");
+		}
 
 		$target = "/usr/cs/undergrad/2018/bjacques/public_html/final/" . $location . $name;
 		if(move_uploaded_file($_FILES['file']['tmp_name'], $target)) {
@@ -74,6 +78,32 @@ switch($data) {
 			echo json_encode($target);
 		}
 		break;
+		/*
+	case "upload-64":
+		$image = $_POST['file'];
+		$image = str_replace('data:image/png;base64,', '', $image);
+		$image = str_replace(' ', '+', $image);
+		$image = base64_decode($image);
+		//$ext = $info['extension'];
+		$name = $_POST['fileName'];
+		$location = $_POST['location'];
+		if($location == 'default') {
+			$location = 'images/';
+		} else {
+			$location = ltrim($location, "./");
+		}
+
+		$target = "/usr/cs/undergrad/2018/bjacques/public_html/final/" . $location . $name;
+		if(file_put_contents($image, $target)) {
+			$default = "/usr/cs/undergrad/2018/bjacques/public_html/final/images/";
+			$val = "./images/";
+			$res = listFiles($default, $val);
+			echo json_encode($res);
+		} else {
+			echo json_encode('Nope');
+		}
+		break;
+		*/
 	case "new-folder":
 		$name = $_POST['name'];
 		if(mkdir("/usr/cs/undergrad/2018/bjacques/public_html/final/images/" . $name)) {

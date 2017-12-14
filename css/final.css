@@ -56,10 +56,45 @@ div.file, div.image-selector {
 }
 
 img.view, canvas.view {
-	width: 100%;
+	width: 800px;
 	height: 576px;
 }
 
-#picture_editor {
+#picture_editor, #picture_hyperlink, #share {
 	display: none;
+}
+
+div.inline {
+	display: inline-block;
+	width: 300px;
+	margin-left: 15px;
+	position: relative;
+	top: 4px;
+}
+
+.ui-slider-handle {
+	top: -0.2em;
+	margin-left: -.6em;
+	width: 1em;
+	height: 1em;
+}
+
+#picture_hyperlink {
+	margin: 0px auto;
+}
+
+div.colorCorrect {
+	position: absolute;
+	width: 800px;
+	left: 50%;
+	z-index: 101;
+	transform: translate(-50%);
+}
+
+#canvas {
+	width: 800px;
+}
+
+#twitter-share {
+	margin-top: 5px;
 }

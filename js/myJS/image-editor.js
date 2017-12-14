@@ -1,5 +1,5 @@
 $("document").ready(function() {
-	var brightness = $("<div id='brightness-slider'></div>").insertAfter("#brightness").slider({
+	var brightness = $("<div id='brightness-slider' class='inline'></div>").insertAfter("#brightness").slider({
 		value: 0,
 		min: -100,
 		max: 100,
@@ -10,7 +10,7 @@ $("document").ready(function() {
 		}
 	});
 
-	var contrast = $("<div id='contrast-slider'></div>").insertAfter("#contrast").slider({
+	var contrast = $("<div id='contrast-slider' class='inline'></div>").insertAfter("#contrast").slider({
 		value: 0,
 		min: -100,
 		max: 100,
@@ -21,7 +21,7 @@ $("document").ready(function() {
 		}
 	});
 
-	var red = $("<div id='red-slider'></div>").insertAfter("#red").slider({
+	var red = $("<div id='red-slider' class='inline'></div>").insertAfter("#red").slider({
 		value: 0,
 		min: 0,
 		max: 100,
@@ -32,7 +32,7 @@ $("document").ready(function() {
 		}
 	});
 
-	var green = $("<div id='green-slider'></div>").insertAfter("#green").slider({
+	var green = $("<div id='green-slider' class='inline'></div>").insertAfter("#green").slider({
 		value: 0,
 		min: 0,
 		max: 100,
@@ -43,7 +43,7 @@ $("document").ready(function() {
 		}
 	});
 
-	var blue = $("<div id='blue-slider'></div>").insertAfter("#blue").slider({
+	var blue = $("<div id='blue-slider' class='inline'></div>").insertAfter("#blue").slider({
 		value: 0,
 		min: 0,
 		max: 100,
@@ -54,6 +54,17 @@ $("document").ready(function() {
 		}
 	});
 
+	var intense = $("<div id='intense-slider' class='inline'></div>").insertAfter("#intense").slider({
+		value: 0,
+		min: 0,
+		max: 100,
+		range: "min",
+		step: 1,
+		stop: function( event, ui ) {
+			$("#intense").val(ui.value).change();
+		}
+	});
+/*
 	$("#rotation-slider").slider({
 		value: 0,
 		min: 0,
@@ -64,27 +75,29 @@ $("document").ready(function() {
 			rotation();
 		}
 	});
-
+*/
 	$(document).on('change', 'input[class=editor_input]', function() {
 		var bright = parseInt($("#brightness").val());
-		console.log("Brightness = "+ bright);
+		//console.log("Brightness = "+ bright);
 		var cont = parseInt($("#contrast").val());
-		console.log("Contrast = "+ cont);
-		//var r = parseInt($("#red").val());
+		//console.log("Contrast = "+ cont);
+		var r = parseInt($("#red").val());
 		//console.log("Red = " + r);
-		//var g = parseInt($("#green").val());
-		//var b = parseInt($("#blue").val());
+		var g = parseInt($("#green").val());
+		var b = parseInt($("#blue").val());
+		var intensity = parseInt($("#intense").val());
 		$(brightness).slider("value", bright);
 		$(contrast).slider("value", cont);
-		//$("#red-slider").slider("value", r);
-		//$("#green-slider").slider("value", g);
-		//$("#blue-slider").slider("value", b);
+		$(red).slider("value", r);
+		$(green).slider("value", g);
+		$(blue).slider("value", b);
+		$(intense).slider("value", intensity);
 		if($("#canvas").length) {
 			Caman("#canvas", function() {
 				this.revert(false);
 				this.brightness(bright);
 				this.contrast(cont);
-		//		this.colorize(r, g, b, 40);
+				this.colorize(r, g, b, intensity);
 				this.render();
 			});
 		}

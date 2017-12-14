@@ -54,32 +54,90 @@
 			<datalist id='folders'>
 			</datalist>
 		</div>
-		<div id="fileNames">
-		</div>
 		<div id="picture_display">
     	</div>
     	<form id="picture_editor">
-    		<div id="color-correction">
-    			<input type="text" id="brightness" class="editor_input" value="0" />
-    			<input type="text" id="contrast" class="editor_input" value="0"/>
-    			<input type="text" id="red" class="editor_input" value="0"/>
-    			<input type="text" id="green" class="editor_input" value="0"/>
-    			<input type="text" id="blue" class="editor_input" value="0"/>
-    			<input type="button" id="upload" class="function" value="Upload Image"/>
+    		<table>
+    			<tr>
+    				<td><input type='button' id='color-correct' class=editor-function value='Color Correction' /></td>
+    				<td><input type='button' id='crop-and-rotate' class='editor-function' value='Crop/Rotate'></td>
+    			</tr>
+  			</table>
+    		<div id='color-form' title='Color Correction' class='color-correct'>
+    			<div id="picture_edit">
+    			</div>
+    			<form>
+    				<table>
+    					<th>Edit Image</th>
+    					<tr>
+    						<td>Brightness:</td>
+    						<td><input type="text" id="brightness" class="editor_input" value="0" /></td>
+						</tr>
+    					<tr>
+    						<td>Contrast:</td>
+    						<td><input type="text" id="contrast" class="editor_input" value="0"/></td>
+    					</tr>
+    					<tr>
+    						<td>Red:</td>
+    						<td><input type="text" id="red" class="editor_input" value="0"/></td>
+    					</tr>
+    					<tr>
+    						<td>Green:</td>
+    						<td><input type="text" id="green" class="editor_input" value="0"/></td>
+    					</tr>
+    					<tr>
+    						<td>Blue:</td>
+    						<td><input type="text" id="blue" class="editor_input" value="0"/></td>
+    					</tr>
+    					<tr>
+    						<td>Color Intensity:</td>
+    						<td><input type="text" id="intense" class="editor_input" value="0"/></td>
+    					</tr>
+    				</table>
+    				<table>
+    					<tr>
+    						<td><input type='button' id='color_correct_save1' value='Download' /></td>
+    						<td><input type='button' id='color_correct_cancel' value='Cancel' /></td>
+    					</tr>
+    				</table>
+    			</form>
     		</div>
+    		<div id='crop-and-rotateForm' title="Crop & Rotate" class='crop-and-rotate'>
+    			<div id='picture-crop'>
+    				<div id='picture-loc'>
+    				</div>
+    			</div>
+    			<button id="cropbutton" type="button">Crop</button>
+  				<button id="scalebutton" type="button">Scale</button>
+  				<button id="rotatebutton" type="button">Rotate</button>
+    		</div>		
     	</form>
     	<div id="picture_hyperlink">
     	</div>
+    	<div id='share'>
+    		<!-- <div id='facebook-share'>
+    			<div id="fb-root"></div>
+  				<script>(function(d, s, id) {
+    				var js, fjs = d.getElementsByTagName(s)[0];
+    				if (d.getElementById(id)) return;
+    				js = d.createElement(s); js.id = id;
+    				js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=";
+    				fjs.parentNode.insertBefore(js, fjs);
+  				}(document, 'script', 'facebook-jssdk'));</script>
+  				<div class="fb-share-button" 
+    				data-href="http://weblab.cs.uml.edu/~bjacques/final/images/New_Images/The-Orville.jpg" 
+    				data-layout="button_count">
+  				</div>
+  			-->
+    		</div>
+    		<div id='twitter-share'>
+    		</div>
+    	</div>
 	</div>
-    <div id="right-control">
-    </div>
 </body>
-<!-- <script src=./js/Directory-Structure-JSON-master/index.js></script> -->
 <script src="./js/myJS/image-editor.js"></script>
 <script src="./js/myJS/final_project.js"></script>
-<!-- <script src="./js/myJS/file_upload.js"></script> -->
-<!-- <script src="./js/myJS/file-upload2.js"></script> -->
 <script src="./js/myJS/jquery-accordion.js"></script>
 <script src="./js/myJS/validation-final.js"></script>
-<script src="./js/facebook-SDK.js"></script>
+<!-- <script src="./js/myJS/crop.js"></script> -->
 </html>

@@ -1,7 +1,7 @@
 $("document").ready(function() {
   window.fbAsyncInit = function() {
     FB.init({
-      appId            : 'your-app-id',
+      appId            : 157455731679909,
       autoLogAppEvents : true,
       xfbml            : true,
       version          : 'v2.11'
