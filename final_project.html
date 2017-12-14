@@ -14,7 +14,7 @@
     <script src="./js/jquery-ui/jquery-ui.min.js"></script>
     <script src="./js/jquery-validate/dist/jquery.validate.min.js"></script>
     <script src="./js/CamanJS-4.1.1/dist/caman.full.min.js"></script>
-    <script src="./js/exif-js-master/exif.js"></script>
+    <!-- <script src="./js/exif-js-master/exif.js"></script> -->
     <script src="./js/tapmodo-Jcrop-1902fbc/js/jquery.Jcrop.min.js"></script>
 </head>
 <body>
@@ -22,24 +22,14 @@
 		<div id="main-folder" class="accordion-main">
 			<h3>All Photos</h3>
 			<div id="main-folder-content">
-				<!--
-					<div id="photo-1"></div>
-					<div id="photo-2"></div>
-					<div class="accordion">
-						<h3>Sub-folder</h3>
-						<div>
-
-						</div>
-					</div>
-				-->
 			</div>
 		</div>
 		<input type='button' id='add-folder' class="function" value='Add Folder' />
 		<input type='button' id='delete-folder' class="function" value='Delete Folder' />
 		<!--
-        <input type='button' id='move-image' class="function" value='Move Image to Folder' />
+		<input type='button' id='move-image' class="function" value='Move Image to Folder' />
 		<input type='button' id='add-folder' class="function" value='Delete Image' />
-        -->
+		-->
 	</div>
 	<div id="main-page">
 		<div id='dialog-form' title='Move Image'>
@@ -62,7 +52,9 @@
     		<table>
     			<tr>
     				<td><input type='button' id='color-correct' class=editor-function value='Color Correction' /></td>
+                    <!--
     				<td><input type='button' id='crop-and-rotate' class='editor-function' value='Crop/Rotate'></td>
+                    -->
     			</tr>
   			</table>
     		<div id='color-form' title='Color Correction' class='color-correct'>
@@ -104,6 +96,7 @@
     				</table>
     			</form>
     		</div>
+            <!--
     		<div id='crop-and-rotateForm' title="Crop & Rotate" class='crop-and-rotate'>
     			<div id='picture-crop'>
     				<div id='picture-loc'>
@@ -112,7 +105,8 @@
     			<button id="cropbutton" type="button">Crop</button>
   				<button id="scalebutton" type="button">Scale</button>
   				<button id="rotatebutton" type="button">Rotate</button>
-    		</div>		
+    		</div>
+            -->		
     	</form>
     	<div id="picture_hyperlink">
     	</div>

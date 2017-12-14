@@ -143,7 +143,6 @@ $("document").ready(function() {
 		//console.log(val);
 		$("#picture_display").html("<img class='view' id='"+ val +"' src='"+ name +"'></img>");
 		$("#picture_edit").html("<img class='canvas' id='canvas' src='"+ name +"' ></img>");
-		//$("#picture_crop").html("<img class='crop' id='crop' src='"+ name +"' ></img>");
 		$("#picture_hyperlink").html("<div><h4>Image Hyperlink</h4></div><a href='"+ adr +"' target='_blank'>"+ adr +"</a>");
 		if($("#share").css('display') == 'none') {
 		//	$('#facebook-share').html("<a id='facebook-btn' class='btn btn-success clearfix'>Facebook Share</a>")
@@ -343,7 +342,7 @@ $("document").ready(function() {
 
 	$(document).on("click", "#color_correct_save1", function() {
 		var download = document.createElement("a");
-		var new_image = document.getElementById('canvas').toDataURL();
+		var new_image = document.getElementById("canvas").toDataURL();
 		download.href = new_image;
 		var new_name = prompt("What's the name of the new file?");
 		download.download = new_name;
@@ -361,6 +360,4 @@ $("document").ready(function() {
 		console.log("Saved");
 		color_correct.dialog("close");
 	});
-
-
 })
